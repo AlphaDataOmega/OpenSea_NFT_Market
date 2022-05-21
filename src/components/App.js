@@ -207,7 +207,7 @@ function App() {
 						<Col md={5} lg={4} xl={5} xxl={4}>
 							{revealTime !== 0 && <Countdown date={currentTime + (revealTime - currentTime)} className='countdown mx-3' />}
 							<p className='text'>
-								Enjoy the AlphaDataOmega OpenSea Rinkeby Test Collection of NFT ADO Punks!
+								Enjoy the AlphaDataOmega OpenSea Rinkeby Test Collection of NFT ADO Punks! Now you can get your ADO Punk minted on OpenSea! Check out the contract at the bottom of the page.
 							</p>
 							<a href="#about" className='button mx-3'>Learn More!</a>
 						</Col>
