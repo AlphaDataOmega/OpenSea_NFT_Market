@@ -77,7 +77,7 @@ Create a .env file in the root directory of your project, and fill in the follow
 
 - IPFS_IMAGE_METADATA_CID="IPFS_CID"
 - IPFS_HIDDEN_IMAGE_METADATA_CID="IPFS_CID"
-- NFT_MINT_DATE="Oct 27, 2021 20:00:00"
+- NFT_MINT_DATE="MON DD, YYYY 20:00:00"
 
 ### 2. Run your migrations
 - For Rinkeby testnet: `truffle migrate --reset --network rinkeby`
@@ -93,30 +93,7 @@ Create a .env file in the root directory of your project, and fill in the follow
 ### 2. Create a new repository
 Input the name of your project, and a description if you wish. You may also choose to make the repository public or private
 
-### 3. Commit your code
-If you have downloaded this code, you may need to initialize it as a git repository, to do this back in your terminal run:
-`$ git init`
-
-Add files for staging:
-`$ git add .`
-
-This will ready your files for the commit, you may see if they have been added by running:
-`$ git status`
-
-Finally commit your code
-`$ git commit -m "Deployment Setup"`
-
-### 4. Update & Push to Remote URL
-If you cloned from a repository, go ahead and update the origin link to the repository you created on GitHub by running:
-`$ git remote set-url origin <YOUR-GITHUB-REPO-LINK>`
-
-Otherwise run this command instead:
-`$ git remote add origin <YOUR-GITHUB-REPO-LINK>`
-
-Finally, push the code to the repoository:
-`$ git push origin master`
-
-### 5. Create or sign in to your Fleek account
+### 4. Create or sign in to your Fleek account
 Easiest option is to sign in with your GitHub account.
 
 Click on Add new site & Connect with GitHub
