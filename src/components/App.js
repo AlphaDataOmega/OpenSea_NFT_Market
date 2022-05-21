@@ -14,12 +14,12 @@ import '../App.css'
 import Navbar from './Navbar'
 
 // Import ABI + Config
-import OpenPunks from '../abis/OpenPunks.json'
+import ADOPunks from '../abis/ADOPunks.json'
 import config from '../config.json'
 
 function App() {
 	const [web3, setWeb3] = useState(null)
-	const [openPunks, setOpenPunks] = useState(null)
+	const [adoPunks, setADOPunks] = useState(null)
 
 	const [supplyAvailable, setSupplyAvailable] = useState(0)
 
@@ -43,19 +43,19 @@ function App() {
 	const loadBlockchainData = async (_web3, _account, _networkId) => {
 		// Fetch Contract, Data, etc.
 		try {
-			const openPunks = new _web3.eth.Contract(OpenPunks.abi, OpenPunks.networks[_networkId].address)
-			setOpenPunks(openPunks)
+			const adoPunks = new _web3.eth.Contract(ADOPunks.abi, ADOPunks.networks[_networkId].address)
+			setADOPunks(adoPunks)
 
-			const maxSupply = await openPunks.methods.maxSupply().call()
-			const totalSupply = await openPunks.methods.totalSupply().call()
+			const maxSupply = await adoPunks.methods.maxSupply().call()
+			const totalSupply = await adoPunks.methods.totalSupply().call()
 			setSupplyAvailable(maxSupply - totalSupply)
 
-			const allowMintingAfter = await openPunks.methods.allowMintingAfter().call()
-			const timeDeployed = await openPunks.methods.timeDeployed().call()
+			const allowMintingAfter = await adoPunks.methods.allowMintingAfter().call()
+			const timeDeployed = await adoPunks.methods.timeDeployed().call()
 			setRevealTime((Number(timeDeployed) + Number(allowMintingAfter)).toString() + '000')
 
 			if (_account) {
-				const ownerOf = await openPunks.methods.walletOfOwner(_account).call()
+				const ownerOf = await adoPunks.methods.walletOfOwner(_account).call()
 				setOwnerOf(ownerOf)
 				console.log(ownerOf)
 			} else {
@@ -126,17 +126,17 @@ function App() {
 		}
 
 		// Mint NFT
-		if (openPunks && account) {
+		if (adoPunks && account) {
 			setIsMinting(true)
 			setIsError(false)
 
-			await openPunks.methods.mint(1).send({ from: account, value: 0 })
+			await adoPunks.methods.mint(1).send({ from: account, value: 0 })
 				.on('confirmation', async () => {
-					const maxSupply = await openPunks.methods.maxSupply().call()
-					const totalSupply = await openPunks.methods.totalSupply().call()
+					const maxSupply = await adoPunks.methods.maxSupply().call()
+					const totalSupply = await adoPunks.methods.totalSupply().call()
 					setSupplyAvailable(maxSupply - totalSupply)
 
-					const ownerOf = await openPunks.methods.walletOfOwner(account).call()
+					const ownerOf = await adoPunks.methods.walletOfOwner(account).call()
 					setOwnerOf(ownerOf)
 				})
 				.on('error', (error) => {
@@ -171,12 +171,12 @@ function App() {
 
 					<Row className='header my-3 p-3 mb-0 pb-0'>
 						<Col xs={12} md={12} lg={8} xxl={8}>
-							<h1>Open Punks</h1>
-							<p className='sub-header'>Availble on 02 / 10 / 22</p>
+							<h1>ADO Punks</h1>
+							<p className='sub-header'>Availble on 05 / 21 / 22</p>
 						</Col>
 						<Col className='flex social-icons'>
 							<a
-								href="https://twitter.com/DappUniversity"
+								href="https://twitter.com/AlphaDataOmega"
 								target='_blank'
 								className='circle flex button'>
 								<img src={twitter} alt="Twitter" />
@@ -200,14 +200,14 @@ function App() {
 						<Col md={5} lg={4} xl={5} xxl={4} className='text-center'>
 							<img
 								src={`https://gateway.pinata.cloud/ipfs/QmXojk54V9XWiQ8u2jEtE1jMfwjVXfSJ38qiebP3kHKoLr/${counter}.png`}
-								alt="Crypto Punk"
+								alt="ADO Punk"
 								className='showcase'
 							/>
 						</Col>
 						<Col md={5} lg={4} xl={5} xxl={4}>
 							{revealTime !== 0 && <Countdown date={currentTime + (revealTime - currentTime)} className='countdown mx-3' />}
 							<p className='text'>
-								By attending the masterclass, you'll learn how to generate NFT images, upload to IPFS, create your NFT contract, and use OpenSea!
+								Enjoy the AlphaDataOmega OpenSea Rinkeby Test Collection of NFT ADO Punks!
 							</p>
 							<a href="#about" className='button mx-3'>Learn More!</a>
 						</Col>
@@ -219,7 +219,7 @@ function App() {
 					<Row className='flex m-3'>
 						<h2 className='text-center p-3'>About the Collection</h2>
 						<Col md={5} lg={4} xl={5} xxl={4} className='text-center'>
-							<img src={showcase} alt="Multiple Crypto Punks" className='showcase' />
+							<img src={showcase} alt="Multiple ADO Punks" className='showcase' />
 						</Col>
 						<Col md={5} lg={4} xl={5} xxl={4}>
 							{isError ? (
@@ -243,7 +243,7 @@ function App() {
 									{ownerOf.length > 0 &&
 										<p><small>View your NFT on
 											<a
-												href={`${openseaURL}/assets/${openPunks._address}/${ownerOf[0]}`}
+												href={`${openseaURL}/assets/${adoPunks._address}/${ownerOf[0]}`}
 												target='_blank'
 												style={{ display: 'inline-block', marginLeft: '3px' }}>
 												OpenSea
@@ -256,12 +256,12 @@ function App() {
 
 					<Row style={{ marginTop: "100px" }}>
 						<Col>
-							{openPunks &&
+							{adoPunks &&
 								<a
-									href={`${explorerURL}/address/${openPunks._address}`}
+									href={`${explorerURL}/address/${adoPunks._address}`}
 									target='_blank'
 									className='text-center'>
-									{openPunks._address}
+									{adoPunks._address}
 								</a>
 							}
 						</Col>
